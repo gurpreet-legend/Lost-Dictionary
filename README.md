@@ -7,4 +7,4 @@
 - Bootstrap
 
 ## Host link :
-> 
+> https://gurpreet-legend.github.io/Lost-Dictionary/
