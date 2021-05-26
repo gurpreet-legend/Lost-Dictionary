@@ -1,0 +1,9 @@
+body{
+    /* background-image: linear-gradient(to left, rgb(94, 255, 215), rgb(74, 232, 253)); */
+    background-color:  rgb(183, 247, 255);
+}
+
+#searchBar{
+    text-align: center;
+    
+}
