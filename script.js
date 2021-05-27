@@ -45,7 +45,7 @@ searchBtn.addEventListener('click', () => {
             //Run a loop to assign the meanings 
             obj.meanings.forEach(element => {
                 container.innerHTML += `
-                    <div id="Box${element.partOfSpeech}" class="card-body bg-light rounded-2 shadow my-4 px-3">
+                    <div id="Box${element.partOfSpeech}" class="card-body bg-light rounded-2 shadow my-4 px-3 d-flex flex-column">
                         <h1 class="card-title mx-2">${element.partOfSpeech.charAt(0).toUpperCase() + element.partOfSpeech.slice(1)}</h1>
                         <hr>
                         <h3 class="card-text mx-3">Definitions :</h3>
@@ -74,22 +74,29 @@ searchBtn.addEventListener('click', () => {
 
                     let partOfSpeechBox = document.getElementById(`Box${element.partOfSpeech}`); //To create a unique ID for each partOfSpeechBox
 
+                    let SynonymHead = document.createElement("h3");
+                    let SynonymPara = document.createElement("para");
+                    
+                    // Assigning classes and text  to Heading and para
+                    SynonymHead.className = "card-text";
+                    SynonymHead.className = "mx-3";
+                    SynonymHead.innerText = `Synonyms :`
+                    
+                    SynonymPara.className = "card-text";
+                    SynonymPara.className = "mx-3";
+                    SynonymPara.style.color = "grey";
+                    SynonymPara.style.fontSize = "1.5rem"; 
+
+                    let Paratext = `- `;
                     if(e.synonyms != undefined)
                     {  
-                        let SynonymHead = document.createElement("h3");
-                        let SynonymPara = document.createElement("para");
-
-                        // Assigning classes and text  to Heading and para
-                        SynonymHead.className = "card-text";
-                        SynonymHead.className = "mx-3";
-                        SynonymHead.innerText = `Synonyms :`
-    
-                        SynonymPara.className = "card-text";
-                        SynonymPara.className = "mx-3";
-                        SynonymPara.style.color = "grey";
-                        SynonymPara.style.fontSize = "1.5rem"; 
-                        SynonymPara.innerText = JSON.stringify(e.synonyms);
-
+                        e.synonyms.forEach(es => {
+                            if(es != undefined)
+                            {
+                                Paratext += es + ` ,`;
+                            }
+                        });
+                        SynonymPara.innerText = Paratext.replace(/.$/,".");
                         // As to print the headig only once in a Box 
                         if (flag == 0){
                             partOfSpeechBox.appendChild(SynonymHead);
@@ -97,8 +104,9 @@ searchBtn.addEventListener('click', () => {
                         }
                         // Printing the synonym list 
                         partOfSpeechBox.appendChild(SynonymPara);
-    
                     }
+    
+                    
                 });
 
             });
@@ -107,11 +115,6 @@ searchBtn.addEventListener('click', () => {
         // if it is failure 
         else{
             // Assign an alert 
-            // let alert = document.getElementById("alert");
-            // alert.style.display = "block";
-            // alert.innerHTML = `
-            //     <strong>Holy guacamole!</strong> Word is not found !
-            //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
             console.log("Some error occurred !");
         }
 
